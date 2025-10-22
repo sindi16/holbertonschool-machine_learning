@@ -4,19 +4,18 @@ along a specific axis."""
 
 
 def cat_matrices2D(mat1, mat2, axis=0):
+    """Function that concatenates two matrices along a specific axis"""
     if axis == 0:
-        # Vertical concatenation (add rows)
         if len(mat1[0]) != len(mat2[0]):
             return None
         result = []
         for row in mat1:
-            result.append(row[:])  # make a copy of each row
+            result.append(row[:])
         for row in mat2:
             result.append(row[:])
         return result
 
     elif axis == 1:
-        # Horizontal concatenation (add columns)
         if len(mat1) != len(mat2):
             return None
         result = []

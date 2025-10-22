@@ -5,6 +5,7 @@ matrix multiplication"""
 
 
 def mat_mul(mat1, mat2):
+    """Function that performs matrix multiplication"""
     row1 = len(mat1)
     col1 = len(mat1[0])
     row2 = len(mat2)
