@@ -4,6 +4,8 @@
 
 
 def add_matrices2D(mat1, mat2):
+    """Function of the addition of two matrices
+    element-wise."""
     if len(mat1) != len(mat2) or len(mat1[0]) != len(mat2[0]):
         return None
 
