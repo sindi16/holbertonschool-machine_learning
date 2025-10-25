@@ -24,9 +24,6 @@ class Exponential:
         if x < 0:
             return 0
         y = self.lambtha * x
-        term = 1.0
-        exp_approx = 1.0
-        for n in range(1, 50):
-            term *= -y / n
-            exp_approx += term
+        n = 100000
+        exp_approx = (1 - y / n) ** n
         return self.lambtha * exp_approx
