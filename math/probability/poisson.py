@@ -1,14 +1,22 @@
+#!/usr/bin/python3
+"""Poisson distribution class."""
+
+
 class Poisson:
-    def __init__(self, data=None, lambtha=1):
-        if lambtha <= 0:
-            raise ValueError:
-            print("lambtha must be a positive value")
-        if type(data) is not list:
-            raise TypeError:
-            print("data must be a list")
-        if data
-        self.__data = __data
-        self.__lambtha = __lambtha
-    @data.setter
-    @Property
-    @lamtha.setter
+    """Class that represents a Poisson distribution."""
+
+    def __init__(self, data=None, lambtha=1.):
+        """Class constructor"""
+
+        if data is None:
+            if lambtha <= 0:
+                raise ValueError("lambtha must be a positive value")
+            self.lambtha = float(lambtha)
+
+        else:
+            if type(data) is not list:
+                raise TypeError("data must be a list")
+            if len(data) < 2:
+                raise ValueError("data must contain multiple values")
+            # Estimate lambtha from data
+            self.lambtha = float(sum(data) / len(data))
