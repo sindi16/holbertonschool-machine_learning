@@ -2,9 +2,6 @@
 """Poisson distribution class."""
 
 
-import math
-
-
 class Poisson:
     """Class that represents a Poisson distribution."""
 
@@ -21,19 +18,35 @@ class Poisson:
                 raise ValueError("data must contain multiple values")
             self.lambtha = float(sum(data) / len(data))
 
+    def factorial(self, n):
+        """Calculate factorial of n"""
+        if n == 0 or n == 1:
+            return 1
+        result = 1
+        for i in range(2, n + 1):
+            result *= i
+        return result
+
+    def exp_neg(self, x, terms=20):
+        """Approximate e^-x using Taylor series"""
+        result = 0
+        for n in range(terms):
+            result += ((-x) ** n) / self.factorial(n)
+        return result
+
     def pmf(self, k):
         """Calculates the PMF for a given number of successes k"""
         k = int(k)
         if k < 0:
             return 0
-        return (math.exp(-self.lambtha) * self.lambtha**k) / math.factorial(k)
+        return (self.lambtha ** k * self.exp_neg(self.lambtha)) / self.factorial(k)
 
     def cdf(self, k):
-        """Calculates the value of the CDF for a given number of “successes"""
+        """Calculates the value of the CDF for a given number of successes"""
         k = int(k)
         if k < 0:
             return 0
-        cdf_value = 0
+        total = 0
         for i in range(k + 1):
-            cdf_value += self.pmf(i)
-        return cdf_value
+            total += self.pmf(i)
+        return total
