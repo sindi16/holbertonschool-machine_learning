@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
-"""represents an exponential distribution"""
+"""Represents an exponential distribution."""
 
 
 class Exponential:
-    """Class that represents an exponential distribution"""
+    """Class that represents an exponential distribution."""
+
     def __init__(self, data=None, lambtha=1.):
-        """class contructor"""
+        """Class constructor."""
         if data is None:
-            if lambtha < 0:
-                raise ValueError("lammbtha must be a positive value")
-            self.lambtha = float(lambtha)       
+            if lambtha <= 0:
+                raise ValueError("lambtha must be a positive value")
+            self.lambtha = float(lambtha)
         else:
             if type(data) is not list:
                 raise TypeError("data must be a list")
