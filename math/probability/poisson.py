@@ -2,6 +2,9 @@
 """Poisson distribution class."""
 
 
+import math
+
+
 class Poisson:
     """Class that represents a Poisson distribution."""
 
@@ -20,7 +23,6 @@ class Poisson:
 
     def pmf(self, k):
         """Calculates the PMF for a given number of successes k"""
-        import math
         k = int(k)
         if k < 0:
             return 0
@@ -28,7 +30,6 @@ class Poisson:
 
     def cdf(self, k):
         """Calculates the value of the CDF for a given number of “successes"""
-        import math
         k = int(k)
         if k < 0:
             return 0
