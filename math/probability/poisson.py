@@ -39,7 +39,9 @@ class Poisson:
         k = int(k)
         if k < 0:
             return 0
-        return (self.lambtha ** k * self.exp_neg(self.lambtha)) / self.factorial(k)
+        return (
+            self.lambtha ** k * self.exp_neg(self.lambtha)
+        ) / self.factorial(k)
 
     def cdf(self, k):
         """Calculates the value of the CDF for a given number of successes"""
