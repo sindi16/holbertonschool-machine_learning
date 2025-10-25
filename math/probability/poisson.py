@@ -1,54 +1,48 @@
 #!/usr/bin/env python3
-"""Poisson distribution class."""
+""" defines Poisson class that represents Poisson distribution """
 
 
 class Poisson:
-    """Class that represents a Poisson distribution."""
+    """class that represents Poisson distribution"""
 
     def __init__(self, data=None, lambtha=1.):
-        """Class constructor"""
+        """class constructor"""
         if data is None:
-            if lambtha <= 0:
+            if lambtha < 1:
                 raise ValueError("lambtha must be a positive value")
-            self.lambtha = float(lambtha)
+            else:
+                self.lambtha = float(lambtha)
         else:
             if type(data) is not list:
                 raise TypeError("data must be a list")
-            if len(data) < 2:
+            elif len(data) < 2:
                 raise ValueError("data must contain multiple values")
-            self.lambtha = float(sum(data) / len(data))
-
-    def factorial(self, n):
-        """Calculate factorial of n"""
-        if n == 0 or n == 1:
-            return 1
-        result = 1
-        for i in range(2, n + 1):
-            result *= i
-        return result
-
-    def exp_neg(self, x, terms=50):
-        """Approximate e^-x using Taylor series"""
-        result = 0
-        for n in range(terms):
-            result += ((-x) ** n) / self.factorial(n)
-        return result
+            else:
+                lambtha = float(sum(data) / len(data))
+                self.lambtha = lambtha
 
     def pmf(self, k):
-        """Calculates the PMF for a given number of successes k"""
-        k = int(k)
+        """calculates the value of the PMF for a given number of successes"""
+        if type(k) is not int:
+            k = int(k)
         if k < 0:
             return 0
-        return (
-            self.lambtha ** k * self.exp_neg(self.lambtha)
-        ) / self.factorial(k)
+        e = 2.7182818285
+        lambtha = self.lambtha
+        factorial = 1
+        for i in range(k):
+            factorial *= (i + 1)
+        pmf = ((lambtha ** k) * (e ** -lambtha)) / factorial
+        return pmf
 
     def cdf(self, k):
-        """Calculates the value of the CDF for a given number of successes"""
-        k = int(k)
+        """calculates the value of the CDF for a given number of successes"""
+
+        if type(k) is not int:
+            k = int(k)
         if k < 0:
             return 0
-        total = 0
+        cdf = 0
         for i in range(k + 1):
-            total += self.pmf(i)
-        return total
+            cdf += self.pmf(i)
+        return cdf
