@@ -27,7 +27,7 @@ class Poisson:
             result *= i
         return result
 
-    def exp_neg(self, x, terms=20):
+    def exp_neg(self, x, terms=50):
         """Approximate e^-x using Taylor series"""
         result = 0
         for n in range(terms):
