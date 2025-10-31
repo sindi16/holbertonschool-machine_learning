@@ -2,7 +2,6 @@
 """create a pd.DataFrame from a np.ndarray"""
 
 
-import pandas as pd
 import string
 
 
