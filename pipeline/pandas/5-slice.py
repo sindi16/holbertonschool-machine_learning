@@ -3,9 +3,6 @@
    taking every 60th row"""
 
 
-import pandas as pd
-
-
 def slice(df):
     """Extracts the columns High, Low, Close, and Volume_BTC"""
     df = df.loc[::60, ['High', 'Low', 'Close', 'Volume_(BTC)']]
