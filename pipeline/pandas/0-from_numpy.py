@@ -1,14 +1,20 @@
 #!/usr/bin/env python3
-"""create a pd.DataFrame from a np.ndarray"""
+"""
+Defines function that creates a Pandas DataFrame from a Numpy ndarray
+"""
 
 
-import string
+import pandas as pd
 
 
 def from_numpy(array):
-    """function that takes an np.ndarray and return a pd.dataframe."""
-    n_cols = array.shape[1]
-    columns = list(string.ascii_uppercase[:n_cols])
+    """Creates a Pandas DataFrame from a numpy.ndarray"""
 
-    df = pd.DataFrame(array, columns=columns)
+    alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I",
+                "J", "K", "L", "M", "N", "O", "P", "Q", "R",
+                "S", "T", "U", "V", "W", "X", "Y", "Z"]
+    column_labels = []
+    for i in range(len(array[0])):
+        column_labels.append(alphabet[i])
+    df = pd.DataFrame(array, columns=column_labels)
     return df
