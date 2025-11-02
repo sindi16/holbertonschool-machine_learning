@@ -30,6 +30,7 @@ df = df.resample('D').agg({
     'Volume_(BTC)': 'sum',
     'Volume_(Currency)': 'sum'
 })
+print(df)
 
 df.plot(subplots=True, figsize=(10, 10),
         title='Bitcoin Daily Data (2017 and Beyond)')
