@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
+""" script of a function that plots a scatter plot """
+
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def scatter():
+    """ function that plots a scatter plot """
 
     mean = [69, 0]
     cov = [[15, 8], [8, 15]]
@@ -11,4 +15,8 @@ def scatter():
     y += 180
     plt.figure(figsize=(6.4, 4.8))
 
-    # your code here
+    plt.scatter(x, y, c='m')
+    plt.xlabel('Height (in)')
+    plt.ylabel('Weight (lbs)')
+    plt.title("Men's Height vs Weight")
+    plt.show()
