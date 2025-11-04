@@ -1,11 +1,4 @@
-#!/usr/bin/env python3
-"""All in one"""
-import numpy as np
-import matplotlib.pyplot as plt
-
-
 def all_in_one():
-    """All in one"""
 
     y0 = np.arange(0, 11) ** 3
 
@@ -29,11 +22,12 @@ def all_in_one():
 
     np.random.seed(5)
     student_grades = np.random.normal(68, 15, 50)
+
     fig = plt.figure()
     fig.suptitle('All in one')
 
     plt.subplot(3, 2, 1)
-    plt.plot(np.arange(0, 11), color='red')
+    plt.plot(np.arange(0, 11), y0, color='red')
     plt.xlim(0, 10)
 
     plt.subplot(3, 2, 2)
@@ -58,7 +52,7 @@ def all_in_one():
     plt.ylabel('Fraction Remaining', fontsize='x-small')
     plt.legend(fontsize='x-small')
     plt.xlim(0, 21000)
-    plt.ylim(0, 1)
+    plt.ylim((0, 1))
 
     plt.subplot(3, 1, 3)
     plt.hist(student_grades, bins=10, range=(0, 101), edgecolor='black')
@@ -69,5 +63,9 @@ def all_in_one():
     plt.xticks(np.arange(0, 101, step=10))
     plt.xlim(0, 100)
 
+
     plt.tight_layout()
     plt.show()
+
+
+all_in_one()
