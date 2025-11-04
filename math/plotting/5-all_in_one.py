@@ -29,8 +29,8 @@ def all_in_one():
 
     np.random.seed(5)
     student_grades = np.random.normal(68, 15, 50)
-    fig = plt.figure(figsize=(8, 6))
-    fig.suptitle('All in one', fontsize='x-small')
+    fig = plt.figure()
+    fig.suptitle('All in one')
 
     plt.subplot(3, 2, 1)
     plt.plot(np.arange(0, 11), color='red')
@@ -41,10 +41,9 @@ def all_in_one():
     plt.title("Men’s Height vs Weight", fontsize='x-small')
     plt.xlabel('Height (in)', fontsize='x-small')
     plt.ylabel('Weight (lbs)', fontsize='x-small')
-    plt.xticks(np.arange(55, 85))
 
     plt.subplot(3, 2, 3)
-    plt.plot(x2, y2, color='blue')
+    plt.plot(x2, y2)
     plt.title('Exponential Decay of C-14', fontsize='x-small')
     plt.xlabel('Time (Years)', fontsize='x-small')
     plt.ylabel('Fraction Remaining', fontsize='x-small')
@@ -59,12 +58,16 @@ def all_in_one():
     plt.ylabel('Fraction Remaining', fontsize='x-small')
     plt.legend(fontsize='x-small')
     plt.xlim(0, 21000)
-    plt.ylim((0, 1))
+    plt.ylim(0, 1)
 
     plt.subplot(3, 1, 3)
     plt.hist(student_grades, bins=10, range=(0, 101), edgecolor='black')
+    plt.xlabel('Grades', fontsize='x-small')
+    plt.ylabel('Number of Students', fontsize='x-small')
+    plt.title("Project A", fontsize='x-small')
     plt.ylim(0, 30)
     plt.xticks(np.arange(0, 101, step=10))
     plt.xlim(0, 100)
 
+    plt.tight_layout()
     plt.show()
