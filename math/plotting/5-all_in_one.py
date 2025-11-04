@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
+"""All in one"""
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def all_in_one():
+    """All in one"""
 
     y0 = np.arange(0, 11) ** 3
 
@@ -26,6 +29,42 @@ def all_in_one():
 
     np.random.seed(5)
     student_grades = np.random.normal(68, 15, 50)
+    fig = plt.figure(figsize=(8, 6))
+    fig.suptitle('All in one', fontsize='x-small')
 
-    
-    plt.title('All in One')
+    plt.subplot(3, 2, 1)
+    plt.plot(np.arange(0, 11), color='red')
+    plt.xlim(0, 10)
+
+    plt.subplot(3, 2, 2)
+    plt.scatter(x1, y1, color='magenta')
+    plt.title("Men’s Height vs Weight", fontsize='x-small')
+    plt.xlabel('Height (in)', fontsize='x-small')
+    plt.ylabel('Weight (lbs)', fontsize='x-small')
+    plt.xticks(np.arange(55, 85))
+
+    plt.subplot(3, 2, 3)
+    plt.plot(x2, y2, color='blue')
+    plt.title('Exponential Decay of C-14', fontsize='x-small')
+    plt.xlabel('Time (Years)', fontsize='x-small')
+    plt.ylabel('Fraction Remaining', fontsize='x-small')
+    plt.xlim(0, 28651)
+    plt.yscale('log')
+
+    plt.subplot(3, 2, 4)
+    plt.plot(x3, y31, color='red', linestyle='dashed', label='C-14')
+    plt.plot(x3, y32, color='green', label='Ra-226')
+    plt.title('Exponential Decay of Radioactive Elements', fontsize='x-small')
+    plt.xlabel('Time (years)', fontsize='x-small')
+    plt.ylabel('Fraction Remaining', fontsize='x-small')
+    plt.legend(fontsize='x-small')
+    plt.xlim(0, 21000)
+    plt.ylim((0, 1))
+
+    plt.subplot(3, 1, 3)
+    plt.hist(student_grades, bins=10, range=(0, 101), edgecolor='black')
+    plt.ylim(0, 30)
+    plt.xticks(np.arange(0, 101, step=10))
+    plt.xlim(0, 100)
+
+    plt.show()
