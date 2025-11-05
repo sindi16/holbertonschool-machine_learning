@@ -1,8 +1,14 @@
 #!/usr/bin/env python3
+""" A script that create a scatter plot"""
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def gradient():
+    """
+    A function that create a scatter plot
+    of sampled elevations on a mountain
+    """
 
     np.random.seed(5)
 
@@ -12,5 +18,9 @@ def gradient():
     plt.figure(figsize=(6.4, 4.8))
 
     # your code here
-
-    
+    mountain = plt.scatter(x, y, c=z)
+    plt.title("Mountain Elevation")
+    plt.xlabel("x coordinate (m)")
+    plt.ylabel("y coordinate (m)")
+    plt.colorbar(mountain, label="elevation (m)")
+    plt.show()
