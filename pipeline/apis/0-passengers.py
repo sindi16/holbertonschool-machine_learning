@@ -1,20 +1,28 @@
 #!/usr/bin/env python3
-"""Create a method that returns the list of ships"""
+""" Defines method """
+
 
 import requests
 
 
 def availableShips(passengerCount):
-    """Create a method that returns the list of ships"""
-    url = "https://swapi-api.hbtn.io/api/starships/"
-    response = requests.get(url)
-
-    if response.status_code != 200:
-        return []
-
-    data = response.json()
+    """ Uses the Star Wars API to return the list of ships """
+    if type(passengerCount) is not int:
+        raise TypeError(
+            "passengerCount must be a positive number of passengers")
+    if passengerCount < 0:
+        raise ValueError(
+            "passengerCount must be a positive number of passengers")
+    url = "https://swapi-api.hbtn.io/api/starships/?format=json"
     ships = []
-
-    for ship in data.get('results', []):
-        ships.append(ship['name'])
-    return ships
+    while url:
+        results = requests.get(url).json()
+        ships += results.get('results')
+        url = results.get('next')
+    shipsList = []
+    for ship in ships:
+        passengers = ship.get('passengers').replace(",", "")
+        if passengers != "n/a" and passengers != "unknown":
+            if int(passengers) >= passengerCount:
+                shipsList.append(ship.get('name'))
+    return shipsList
