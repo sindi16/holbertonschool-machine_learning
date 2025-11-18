@@ -1,32 +1,39 @@
 #!/usr/bin/env python3
-""" Uses the (unofficial) SpaceX API """
+"""A script that displays the number of launches per rocket."""
+
 import requests
 
 
-if __name__ == "__main__":
-    url = 'https://api.spacexdata.com/v4/launches'
-    response = requests.get(url)
-    try:
-        results = response.json()
-    except requests.exceptions.JSONDecodeError:
-        print("Error: Launches data is not valid JSON")
-        results = []
-    rocketDict = {}
-    for launch in results:
-        rocket = launch.get('rocket')
-        rocket_url = f'https://api.spacexdata.com/v4/rockets/{rocket}'
-        rocket_response = requests.get(rocket_url)
-        try:
-            rocket_data = rocket_response.json()
-        except requests.exceptions.JSONDecodeError:
-            print(f"Warning: Rocket data for {rocket} is not valid JSON")
-            continue
-        rocket_name = rocket_data.get('name')
-        if rocketDict.get(rocket_name) is None:
-            rocketDict[rocket_name] = 1
+def rocket_frequency():
+    """A function that displays the number of launches per rocket"""
+
+    url = "https://api.spacexdata.com"
+
+    launches = requests.get(f"{url}/v4/launches").json()
+
+    counts = {}
+    for launch in launches:
+        rocket_id = launch["rocket"]
+
+        if rocket_id in counts:
+            counts[rocket_id] += 1
         else:
-            rocketDict[rocket_name] += 1
-    rocketList = sorted(rocketDict.items(), key=lambda kv: kv[0])
-    rocketList = sorted(rocketList, key=lambda kv: kv[1], reverse=True)
-    for rocket in rocketList:
-        print(f"{rocket[0]}: {rocket[1]}")
+            counts[rocket_id] = 1
+
+    names = {}
+    for rocket_id in counts:
+        data = requests.get(f"{url}/v4/rockets/{rocket_id}").json()
+        names[rocket_id] = data["name"]
+
+    results = []
+    for rocket_id, count in counts.items():
+        rocket_name = names[rocket_id]
+        results.append((rocket_name, count))
+
+        results.sort(key=lambda item: (-item[1], item[0]))
+    return results
+
+
+if __name__ == "__main__":
+    for name, count in rocket_frequency():
+        print(f"{name}: {count}")
