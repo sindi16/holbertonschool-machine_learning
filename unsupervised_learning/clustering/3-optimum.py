@@ -34,4 +34,3 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
         return results, d_vars
     except Exception:
         return None, None
-  
