@@ -25,7 +25,7 @@ def train_model(network, data, labels, batch_size,
                           y=labels,
                           epochs=epochs,
                           batch_size=batch_size,
-                          validation_data=validation_data,
+                          validation_data=None,
                           verbose=verbose,
                           shuffle=shuffle)
     return history
