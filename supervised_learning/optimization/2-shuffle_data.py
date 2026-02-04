@@ -15,4 +15,8 @@ def shuffle_data(X, Y):
 
         :return: shuffled X and Y matrices
     """
-    
+    m = X.shape[0]
+    permutation = np.random.permutation(m)
+    shuffled_X = X[permutation]
+    shuffled_Y = Y[permutation]
+    return shuffled_X, shuffled_Y
