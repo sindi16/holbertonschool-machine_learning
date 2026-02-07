@@ -27,3 +27,4 @@ def learning_rate_decay(alpha, decay_rate, decay_step):
         decay_steps=decay_step,
         staircase=True
     )
+    return learning_rate_decay_op
