@@ -18,7 +18,9 @@ def f1_score(confusion):
 
     rec = sensitivity(confusion)
     prec = precision(confusion)
-
+    classes = confusion.shape[0]
+    f1 = np.zeros(classes,)
+    
     # Avoid division by zero
     f1 = 2 * (prec * rec) / (prec + rec + 1e-8)
     return f1
