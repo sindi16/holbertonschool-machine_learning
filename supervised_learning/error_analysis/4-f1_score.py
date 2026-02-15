@@ -1,36 +1,30 @@
 #!/usr/bin/env python3
 """
-    F1 score computation
+    F1 score
 """
 import numpy as np
-get_recall = __import__('1-sensitivity').sensitivity
-get_precision = __import__('2-precision').precision
+sensitivity = __import__('1-sensitivity').sensitivity
+precision = __import__('2-precision').precision
 
 
-def compute_f1(conf_matrix):
+def f1_score(confusion):
     """
-    Calculates the F1 score for each class using a confusion matrix
+        function that calculates F1 score of a confusion matrix
 
-    :param conf_matrix: ndarray of shape (num_classes, num_classes)
-    :return: ndarray of shape (num_classes,) containing F1 scores
+        :param confusion: ndarray, shape(classes, classes)
+
+        :return: ndarray, shape(classes,) F1 score of each class
     """
+    # number of classes
+    classes = confusion.shape[0]
+    # initialize f1 score matrix
+    f_one = np.zeros((classes,))
 
-    # Total number of classes
-    num_classes = conf_matrix.shape[0]
+    calc_precision = precision(confusion)
+    calc_sensitivity = sensitivity(confusion)
 
-    # Initialize array to store F1 scores
-    f1_scores = np.zeros(num_classes)
+    for i in range(classes):
+        f_one[i] = (2 * (calc_precision[i] * calc_sensitivity[i]) /
+                    (calc_precision[i] + calc_sensitivity[i]))
 
-    # Compute precision and recall for all classes
-    precisions = get_precision(conf_matrix)
-    recalls = get_recall(conf_matrix)
-
-    # Compute F1 score per class
-    for class_idx in range(num_classes):
-        f1_scores[class_idx] = (
-            2 * precisions[class_idx] * recalls[class_idx]
-        ) / (
-            precisions[class_idx] + recalls[class_idx]
-        )
-
-    return f1_scores
+    return f_one
