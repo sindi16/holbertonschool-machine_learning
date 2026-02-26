@@ -1,28 +1,15 @@
 #!/usr/bin/env python3
 """
-    Create layer with L2 regularization
+    Early Stopping
 """
 
-import tensorflow.compat.v1 as tf
 
-
-def l2_reg_create_layer(prev, n, activation, lambtha):
+def early_stopping(cost, opt_cost, threshold, patience, count):
     """
-        Function that creates a tensorflow layer includes L2 regularization
+        function that determines if should stop gradient descent early
     """
-    # set initialization to He et. al
-    initializer = tf.keras.initializers.VarianceScaling(scale=2.0,
-                                                        mode='fan_avg')
-
-    # create layer Dense with parameters
-    new_layer = (
-        tf.layers.Dense(n,
-                        activation=activation,
-                        kernel_initializer=initializer,
-                        kernel_regularizer=tf.keras.regularizers.l2(lambtha),
-                        name="layer"))
-
-    # apply layer to input
-    output = new_layer(prev)
-
-    return output
+    if opt_cost - cost > threshold:
+        count = 0
+    else:
+        count += 1
+    return count == patience, count
