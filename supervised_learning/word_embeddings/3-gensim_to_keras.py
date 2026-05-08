@@ -3,7 +3,6 @@
 NLP --WE --Task 3
 """
 
-import gensim
 import tensorflow as tf
 
 
