@@ -3,7 +3,7 @@
 NLP --WE --Task 3
 """
 
-import tensorflow as tf
+import gensim
 
 
 def gensim_to_keras(model):
