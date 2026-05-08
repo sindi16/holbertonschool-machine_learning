@@ -1,18 +1,29 @@
 #!/usr/bin/env python3
 """
-NLP --WE --Task 3
+NLP --WE --Task 2
 """
 
-import tensorflow as tf
+import gensim
 
 
-def gensim_to_keras(model):
+def word2vec_model(sentences, vector_size=100, min_count=5,
+                   window=5, negative=5, cbow=True,
+                   epochs=5, seed=0, workers=1):
     """
+    Creates and trains a Word2Vec model
     """
-    keys = model.wv
-    weights = keys.vectors
+    sg = 0 if cbow else 1
 
-    return tf.keras.layers.Embedding(input_dim=weights.shape[0],
-                                     output_dim=weights.shape[1],
-                                     weights=[weights],
-                                     trainable=True)
+    model = gensim.models.Word2Vec(
+        sentences=sentences,
+        vector_size=vector_size,
+        window=window,
+        min_count=min_count,
+        negative=negative,
+        sg=sg,
+        seed=seed,
+        workers=workers,
+        epochs=epochs
+    )
+
+    return model
